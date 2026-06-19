@@ -6,11 +6,11 @@ if(!isset($_SESSION["user_id"])){
     header("Location: login.php");
     exit;
 }
-
+//нахождение пользователя по id и fio
 $user_id=$_SESSION["user_id"];
 $fio=$_SESSION["fio"];
 $message="";
-
+//проверка отправки формы авторизации
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     $order_id=$_POST["order_id"];
     $text=trim($_POST["text"]);
@@ -58,12 +58,20 @@ $result=mysqli_query($conn,$sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Личный кабинет</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-light">
 
 <div class="container py-5">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
+        <div class="card shadow-sm">
+                <div class="card-body p-4">
+                     <div class="text-center mb-3">
+            <img src="assets/logo.png"
+                 alt="Банкетам.Нет"
+                 class="logo">
+        </div>
         <div>
             <h1 class="h3 mb-1">Личный кабинет</h1>
             <p class="mb-0">Здравствуйте, <?= $fio ?>!</p>
@@ -72,6 +80,9 @@ $result=mysqli_query($conn,$sql);
         <a href="create_order.php" class="btn btn-primary">
             Создать заявку
         </a>
+        <a href="logout.php" class="btn btn-danger">
+    Выйти
+</a>
     </div>
 
     <?php if ($message != ""): ?>
@@ -86,7 +97,37 @@ $result=mysqli_query($conn,$sql);
             <h2 class="h4 mb-3">История заявок</h2>
 
             <?php if (mysqli_num_rows($result) > 0): ?>
+                <div id="banquetSlider" class="carousel slide mb-4" data-bs-ride="carousel" data-bs-interval="3000">
 
+    <div class="carousel-inner">
+
+        <div class="carousel-item active">
+            <img src="assets/slide1.jpg" class="d-block w-100 slider-img" alt="Веранда">
+        </div>
+
+        <div class="carousel-item">
+            <img src="assets/slide2.jpg" class="d-block w-100 slider-img" alt="Ресторан">
+        </div>
+
+        <div class="carousel-item">
+            <img src="assets/slide3.jpg" class="d-block w-100 slider-img" alt="Летняя веранда">
+        </div>
+
+        <div class="carousel-item">
+            <img src="assets/slide4.jpg" class="d-block w-100 slider-img" alt="Закрытая веранда">
+        </div>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#banquetSlider" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#banquetSlider" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+
+</div>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped align-middle">
                         <tr>

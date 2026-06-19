@@ -1,8 +1,9 @@
 <?php
+//подключение к бд
 require_once "db.php";
 
 $message="";
-
+//проверка отправки формы регистрации
 if ($_SERVER["REQUEST_METHOD"]=="POST"){
     $login=trim($_POST["login"]);
     $password=trim($_POST["password"]);
@@ -13,6 +14,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     if ($login==""||$password==""||$fio==""||$phone==""||$email==""){
         $message="Заполните все поля.";
     } elseif (!preg_match("/^[A-Za-z0-9]{6,}$/",$login)){
+        //проверка логина
         $message="Логин должен содержать только латинские буквы и цифры, минимум 6 символов.";
     } elseif (strlen($password)<8){
         $message="Пароль должен быть не менее 8 символов.";
@@ -22,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
         if(mysqli_num_rows($check)>0){
             $message="Такой логин уже существует.";
         }else{
+            //добавление записи в бд 
             $sql="INSERT INTO users(login,password,fio,phone,email)
             VALUES ('$login','$password','$fio','$phone','$email')";
 
@@ -43,6 +46,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Регистрация</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-light">
 
@@ -52,7 +56,13 @@ if ($_SERVER["REQUEST_METHOD"]=="POST"){
 
             <div class="card shadow-sm">
                 <div class="card-body p-4">
-
+                    <div class="card shadow-sm">
+                <div class="card-body p-4">
+                     <div class="text-center mb-3">
+            <img src="assets/logo.png"
+                 alt="Банкетам.Нет"
+                 class="logo">
+        </div>
                     <h1 class="h3 mb-4 text-center">Регистрация</h1>
 
                     <?php if ($message != ""): ?>

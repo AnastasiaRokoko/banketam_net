@@ -1,5 +1,6 @@
 <?php
 session_start();
+//подключение к бд
 require_once "db.php";
 
 $message = "";
@@ -7,7 +8,7 @@ $message = "";
 if (isset($_POST["admin_login"])) {
     $login = $_POST["login"];
     $password = $_POST["password"];
-
+    //проверка корректности логина и пароля администратора
     if ($login == "Admin26" && $password == "Demo20") {
         $_SESSION["admin"] = true;
     } else {
@@ -25,6 +26,7 @@ if (!isset($_SESSION["admin"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход администратора</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-light">
 
@@ -33,9 +35,17 @@ if (!isset($_SESSION["admin"])) {
         <div class="col-12 col-md-6 col-lg-5">
             <div class="card shadow-sm">
                 <div class="card-body p-4">
-
+<div class="card shadow-sm">
+                <div class="card-body p-4">
+                     <div class="text-center mb-3">
+            <img src="assets/logo.png"
+                 alt="Банкетам.Нет"
+                 class="logo">
+        </div>
                     <h1 class="h3 text-center mb-4">Вход администратора</h1>
-
+                    <a href="logout.php" class="btn btn-danger mb-3">
+    Выйти
+</a>
                     <?php if ($message != ""): ?>
                         <div class="alert alert-danger"><?= $message ?></div>
                     <?php endif; ?>

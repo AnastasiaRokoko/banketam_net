@@ -1,5 +1,6 @@
 <?php
 session_start();
+//подключение к бд
 require_once "db.php";
 
 $message="";
@@ -7,7 +8,7 @@ $message="";
 if($_SERVER["REQUEST_METHOD"]=="POST"){
     $login=trim($_POST["login"]);
     $password=trim($_POST["password"]);
-
+//проверка на заполненность полей
     if($login==""||$password==""){
         $message="Все поля должны быть заполнены";
     }else{
@@ -38,6 +39,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Авторизация</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-light">
 
@@ -47,7 +49,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
 
             <div class="card shadow-sm">
                 <div class="card-body p-4">
-
+                     <div class="text-center mb-3">
+            <img src="assets/logo.png"
+                 alt="Банкетам.Нет"
+                 class="logo">
+        </div>
                     <h1 class="h3 text-center mb-4">Авторизация</h1>
 
                     <?php if ($message!=""):?>

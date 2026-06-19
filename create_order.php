@@ -2,6 +2,7 @@
 session_start();
 require_once "db.php";
 
+//проверка, авторизован ли пользователь
 if(!isset($_SESSION["user_id"])){
     header("Location: login.php");
     exit;
@@ -10,6 +11,7 @@ if(!isset($_SESSION["user_id"])){
 $message="";
 $user_id=$_SESSION["user_id"];
 
+//получение списка помещений из бд
 $rooms=mysqli_query($conn,"SELECT*FROM rooms");
 
 if($_SERVER["REQUEST_METHOD"]=="POST") {
@@ -39,6 +41,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Создание заявки</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-light">
 
@@ -48,7 +51,13 @@ if($_SERVER["REQUEST_METHOD"]=="POST") {
 
             <div class="card shadow-sm">
                 <div class="card-body p-4">
-
+<div class="card shadow-sm">
+                <div class="card-body p-4">
+                     <div class="text-center mb-3">
+            <img src="assets/logo.png"
+                 alt="Банкетам.Нет"
+                 class="logo">
+        </div>
                     <h1 class="h3 text-center mb-4">Создание заявки</h1>
 
                     <p class="text-center">
